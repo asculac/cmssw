@@ -37,7 +37,9 @@ switchOnVIDElectronIdProducer(process, dataFormat)
 
 # define which IDs we want to produce
 my_id_modules = [
-        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer18UL_ID_ISO_BO_cff',
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer16UL_ID_ISO_cff',
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer17UL_ID_ISO_cff',
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer18UL_ID_ISO_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring16_GeneralPurpose_V1_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring16_HZZ_V1_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V1_cff',
@@ -53,6 +55,8 @@ for idmod in my_id_modules:
 process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
         #
         eleMVAs             = cms.vstring(
+                                          "egmGsfElectronIDs:mvaEleID-Summer16UL-ID-ISO-HZZ",
+                                          "egmGsfElectronIDs:mvaEleID-Summer17UL-ID-ISO-HZZ",
                                           "egmGsfElectronIDs:mvaEleID-Summer18UL-ID-ISO-HZZ",
                                           "egmGsfElectronIDs:mvaEleID-Spring16-GeneralPurpose-V1-wp80",
                                           "egmGsfElectronIDs:mvaEleID-Spring16-GeneralPurpose-V1-wp90",
@@ -72,6 +76,8 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                           "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wpLoose",
                                           ),
         eleMVALabels        = cms.vstring(
+                                          "Summer16ULIDISOHZZ",
+                                          "Summer17ULIDISOHZZ",
                                           "Summer18ULIDISOHZZ",
                                           "Spring16GPV1wp80",
                                           "Spring16GPV1wp90",
@@ -91,6 +97,10 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                           "Fall17isoV1wpLoose",
                                           ),
         eleMVAValMaps        = cms.vstring(
+                                           "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer16ULIdIsoValues",
+                                           "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer16ULIdIsoRawValues",
+                                           "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer17ULIdIsoValues",
+                                           "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer17ULIdIsoRawValues",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer18ULIdIsoValues",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer18ULIdIsoRawValues",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring16GeneralPurposeV1Values",
@@ -105,6 +115,10 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values",
                                            ),
         eleMVAValMapLabels   = cms.vstring(
+                                           "Summer16ULIdIsoVals",
+                                           "Summer16ULIdIsoRawVals",
+                                           "Summer17ULIdIsoVals",
+                                           "Summer17ULIdIsoRawVals",
                                            "Summer18ULIdIsoVals",
                                            "Summer18ULIdIsoRawVals",
                                            "Spring16GPV1Vals",

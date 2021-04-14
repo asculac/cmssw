@@ -3,6 +3,14 @@ import FWCore.ParameterSet.Config as cms
 mvaConfigsForEleProducer = cms.VPSet( )
 
 # Import and add all desired MVAs
+from RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer16UL_ID_ISO_cff \
+    import mvaEleID_Summer16UL_ID_ISO_producer_config
+mvaConfigsForEleProducer.append(mvaEleID_Summer16UL_ID_ISO_producer_config)
+
+from RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer17UL_ID_ISO_cff \
+    import mvaEleID_Summer17UL_ID_ISO_producer_config
+mvaConfigsForEleProducer.append(mvaEleID_Summer17UL_ID_ISO_producer_config)
+
 from RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer18UL_ID_ISO_cff \
     import mvaEleID_Summer18UL_ID_ISO_producer_config
 mvaConfigsForEleProducer.append( mvaEleID_Summer18UL_ID_ISO_producer_config )
