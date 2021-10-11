@@ -37,6 +37,7 @@ switchOnVIDElectronIdProducer(process, dataFormat)
 
 # define which IDs we want to produce
 my_id_modules = [
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_ID_NOISO_cff'
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Autumn18_ID_NOISO_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer16UL_ID_ISO_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer17UL_ID_ISO_cff',
@@ -56,6 +57,7 @@ for idmod in my_id_modules:
 process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
         #
         eleMVAs             = cms.vstring( 
+                                          "egmGsfElectronIDs:mvaEleID-Fall17-ID-NOISO-HZZ",
                                           "egmGsfElectronIDs:mvaEleID-Autumn18-ID-NOISO-HZZ",
                                           "egmGsfElectronIDs:mvaEleID-Summer16UL-ID-ISO-HZZ",
                                           "egmGsfElectronIDs:mvaEleID-Summer17UL-ID-ISO-HZZ",
@@ -78,6 +80,7 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                           "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wpLoose",
                                           ),
         eleMVALabels        = cms.vstring(
+                                          "Fall17IDNOISOHZZ",
                                           "Autumn18IDNOISOHZZ",
                                           "Summer16ULIDISOHZZ",
                                           "Summer17ULIDISOHZZ",
@@ -100,6 +103,8 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                           "Fall17isoV1wpLoose",
                                           ),
         eleMVAValMaps        = cms.vstring(
+                                           "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IdNoIsoValues",
+                                           "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IdNoIsoRawValues",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Autumn18IdNoIsoValues",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Autumn18IdNoIsoRawValues",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer16ULIdIsoValues",
@@ -120,6 +125,8 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values",
                                            ),
         eleMVAValMapLabels   = cms.vstring(
+                                           "Fall17IdNoIsoVals",
+                                           "Fall17IdNoIsoRawVals"
                                            "Autumn18IdNoIsoVals",
                                            "Autumn18IdNoIsoRawVals",
                                            "Summer16ULIdIsoVals",
