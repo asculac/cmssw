@@ -37,7 +37,7 @@ switchOnVIDElectronIdProducer(process, dataFormat)
 
 # define which IDs we want to produce
 my_id_modules = [
-        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_ID_NOISO_cff'
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_ID_NOISO_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Autumn18_ID_NOISO_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer16UL_ID_ISO_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer17UL_ID_ISO_cff',
@@ -126,7 +126,7 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
                                            ),
         eleMVAValMapLabels   = cms.vstring(
                                            "Fall17IdNoIsoVals",
-                                           "Fall17IdNoIsoRawVals"
+                                           "Fall17IdNoIsoRawVals",
                                            "Autumn18IdNoIsoVals",
                                            "Autumn18IdNoIsoRawVals",
                                            "Summer16ULIdIsoVals",
