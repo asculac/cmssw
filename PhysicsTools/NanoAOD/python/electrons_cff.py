@@ -166,23 +166,18 @@ calibratedPatElectronsNano = RecoEgamma.EgammaTools.calibratedEgammas_cff.calibr
 
 (run2_egamma_2016 & tracker_apv_vfp30_2016).toModify(calibratedPatElectronsNano,
     correctionFile = cms.string("EgammaAnalysis/ElectronTools/data/ScalesSmearings/Run2016_UltraLegacy_preVFP_RunFineEtaR9Gain"),
-    mvaHZZinputTag = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer16ULIdIsoValues") 
-
 ) 
 
 (run2_egamma_2016 & ~tracker_apv_vfp30_2016).toModify(calibratedPatElectronsNano,
     correctionFile = cms.string("EgammaAnalysis/ElectronTools/data/ScalesSmearings/Run2016_UltraLegacy_postVFP_RunFineEtaR9Gain"),
-    mvaHZZinputTag = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer16ULIdIsoValues") 
 )
 
 run2_egamma_2017.toModify(calibratedPatElectronsNano,
     correctionFile = cms.string("EgammaAnalysis/ElectronTools/data/ScalesSmearings/Run2017_24Feb2020_runEtaR9Gain_v2"),
-    mvaHZZinputTag = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer17ULIdIsoValues") 
 )
 
 run2_egamma_2018.toModify(calibratedPatElectronsNano,
     correctionFile = cms.string("EgammaAnalysis/ElectronTools/data/ScalesSmearings/Run2018_29Sep2020_RunFineEtaR9Gain"),
-    mvaHZZinputTag = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer18ULIdIsoValues") 
 
 )
 
@@ -208,7 +203,6 @@ slimmedElectronsWithUserData = cms.EDProducer("PATElectronUserDataEmbedder",
         mvaFall17V1noIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values"),
         mvaFall17V2Iso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IsoV2Values"),
         mvaFall17V2noIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV2Values"),
-        mvaHZZIdIso = mvaHZZinputTag,
         miniIsoChg = cms.InputTag("isoForEle:miniIsoChg"),
         miniIsoAll = cms.InputTag("isoForEle:miniIsoAll"),
         PFIsoChg = cms.InputTag("isoForEle:PFIsoChg"),
