@@ -2,6 +2,7 @@ import FWCore.ParameterSet.Config as cms
 from PhysicsTools.NanoAOD.nano_eras_cff import *
 from PhysicsTools.NanoAOD.common_cff import *
 import PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi
+from Configuration.ProcessModifiers.run2_miniAOD_UL_cff import run2_miniAOD_UL #adeed to select UL from run2
 from math import ceil,log
 #NOTE: All definitions of modules should point to the latest flavour of the electronTable in NanoAOD.
 #Common modifications for past eras are done at the end whereas modifications specific to a single era is done after the original definition.
@@ -46,6 +47,9 @@ electron_id_modules_WorkingPoints_nanoAOD = cms.PSet(
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V1_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_iso_V2_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V2_cff',
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer16UL_ID_ISO_cff',
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer17UL_ID_ISO_cff',
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Summer18UL_ID_ISO_cff',
     ),
     WorkingPoints = cms.vstring(
         "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-veto",
@@ -196,6 +200,7 @@ slimmedElectronsWithUserData = cms.EDProducer("PATElectronUserDataEmbedder",
         mvaFall17V1noIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values"),
         mvaFall17V2Iso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IsoV2Values"),
         mvaFall17V2noIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV2Values"),
+        mvaHZZIdIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer18ULIdIsoValues"),
         miniIsoChg = cms.InputTag("isoForEle:miniIsoChg"),
         miniIsoAll = cms.InputTag("isoForEle:miniIsoAll"),
         PFIsoChg = cms.InputTag("isoForEle:PFIsoChg"),
@@ -305,6 +310,15 @@ for modifier in run2_miniAOD_80XLegacy, run2_nanoAOD_94X2016:
                       VIDNestedWPBitmapSpring15 = cms.InputTag("bitmapVIDForEleSpring15"),
                       VIDNestedWPBitmapSum16 = cms.InputTag("bitmapVIDForEleSum16"),
                       )
+(run2_egamma_2016 & run2_miniAOD_UL).toModify(slimmedElectronsWithUserData.userFloats,
+    mvaHZZIdIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer16ULIdIsoValues"), 
+)
+(run2_egamma_2017 & run2_miniAOD_UL).toModify(slimmedElectronsWithUserData.userFloats,
+    mvaHZZIdIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer17ULIdIsoValues") ,
+)
+(run2_egamma_2018 & run2_miniAOD_UL).toModify(slimmedElectronsWithUserData.userFloats,
+    mvaHZZIdIso = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Summer18ULIdIsoValues"), 
+)
 #################################################END slimmedElectrons with user data#####################
 #################################################finalElectrons#####################
 finalElectrons = cms.EDFilter("PATElectronRefSelector",
@@ -370,6 +384,7 @@ electronTable = cms.EDProducer("SimpleCandidateFlatTableProducer",
         mvaFall17V2noIso_WP80 = Var("userInt('mvaFall17V2noIso_WP80')",bool,doc="MVA noIso ID V2 WP80"),
         mvaFall17V2noIso_WP90 = Var("userInt('mvaFall17V2noIso_WP90')",bool,doc="MVA noIso ID V2 WP90"),
         mvaFall17V2noIso_WPL = Var("userInt('mvaFall17V2noIso_WPL')",bool,doc="MVA noIso ID V2 loose WP"),
+        mvaHZZIdIsoValue = Var("userFloat('mvaHZZIdIso')", float,doc="HZZ MVA Iso ID score"),
 
         cutBased = Var("userInt('cutbasedID_Fall17_V2_veto')+userInt('cutbasedID_Fall17_V2_loose')+userInt('cutbasedID_Fall17_V2_medium')+userInt('cutbasedID_Fall17_V2_tight')",int,doc="cut-based ID Fall17 V2 (0:fail, 1:veto, 2:loose, 3:medium, 4:tight)"),
         vidNestedWPBitmap = Var("userInt('VIDNestedWPBitmap')",int,doc=_bitmapVIDForEle_docstring),
