@@ -41,6 +41,8 @@ my_id_modules = [
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Spring16_HZZ_V1_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V1_cff',
         'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_iso_V1_cff',
+        'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Autumn18_ID_NOISO_cff.py',
+    
                  ]
 
 #add them to the VID producer
@@ -59,21 +61,24 @@ process.ntuplizer = cms.EDAnalyzer('ElectronMVANtuplizer',
         pileupMiniAOD        = cms.InputTag('slimmedAddPileupInfo'),
         genParticlesMiniAOD  = cms.InputTag('prunedGenParticles'),
         #
-        eleMVAs             = cms.untracked.vstring(
+        eleMVAs             = cms.untracked.vstring("egmGsfElectronIDs:mvaEleID-Autumn18-ID-NOISO-HZZ"
                                           ),
-        eleMVALabels        = cms.untracked.vstring(
+        eleMVALabels        = cms.untracked.vstring("Autumn18IDNOISOHZZ"
                                           ),
         eleMVAValMaps        = cms.untracked.vstring(
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring16GeneralPurposeV1Values",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring16HZZV1Values",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IsoV1Values",
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values",
+                                           "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Autumn18IdNoIsoValues",
+            
                                            ),
         eleMVAValMapLabels   = cms.untracked.vstring(
                                            "Spring16GPVals",
                                            "Spring16HZZVals",
                                            "Fall17IsoV1Vals",
                                            "Fall17NoIsoV1Vals",
+                                           "Autumn18IdNoIsoVals",
                                            ),
         eleMVACats           = cms.untracked.vstring(
                                            "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Categories",
